@@ -7,14 +7,17 @@ using UnityEngine;
 /// </summary>
 public class 暴力求解法 : MonoBehaviour
 {
-
-
     // Start is called before the first frame update
     void Start()
     {
+        暴力求解();
+    }
+
+    private void 暴力求解()
+    {
         int[] priceArray = { 100, 113, 110, 85, 105, 102, 86, 63, 81, 101, 94, 106, 101, 79, 94, 90, 97 };
         int[] priceFluctuationArray = new int[priceArray.Length - 1];
-       
+
         for (int i = 1; i < priceFluctuationArray.Length; i++)
         {
             priceFluctuationArray[i] = priceArray[i] - priceArray[i - 1];
@@ -35,7 +38,7 @@ public class 暴力求解法 : MonoBehaviour
                 {
                     totalTemp += priceFluctuationArray[index];
                 }
-                if(totalTemp > total)
+                if (totalTemp > total)
                 {
                     total = totalTemp;
                     startIndex = i;
@@ -46,10 +49,8 @@ public class 暴力求解法 : MonoBehaviour
 
         Debug.Log("startIndex : " + startIndex);
         Debug.Log("endIndex : " + endIndex);
-        Debug.Log("购买日期是第" + startIndex + "天 ， 出售应该是第" + (endIndex+1) + "天");
+        Debug.Log("购买日期是第" + startIndex + "天 ， 出售应该是第" + (endIndex + 1) + "天");
     }
-
-
 
 
 }
