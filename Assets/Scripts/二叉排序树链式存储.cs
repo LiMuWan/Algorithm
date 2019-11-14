@@ -15,8 +15,12 @@ public class 二叉排序树链式存储 : MonoBehaviour
             tree.Add(data[i]);
         }
         tree.MiddleTraversal();
-        Debug.Log(tree.Find(99));
-        Debug.Log(tree.Find(100));
+        //Debug.Log(tree.Find(99));
+        //Debug.Log(tree.Find(100));
+        tree.Delete(73);
+        tree.MiddleTraversal();
+        tree.Delete(99);
+        tree.MiddleTraversal();
     }
 }
 
@@ -120,6 +124,74 @@ public class BSTree
            }
         }
     }
+
+    public bool Delete(int item)
+    {
+        BSNode temp = root;
+        while (true)
+        {
+            if (temp == null) return false;
+            if (temp.data == item)
+            {
+                Delete(temp);
+                return true;
+            }
+            if (item >= temp.data)
+                temp = temp.RightChild;
+            else
+                temp = temp.LeftChild;
+        }
+    }
+
+    public void Delete(BSNode node)
+    {
+        if(node.LeftChild == null && node.RightChild == null)
+        {
+            if(node.Parent == null)
+            {
+                root = null;
+            }
+            else if(node.Parent.LeftChild == node)
+            {
+                node.Parent.LeftChild = null;
+            }
+            else if(node.Parent.RightChild == node)
+            {
+                node.Parent.RightChild = null;
+            }
+            node.Parent = null;
+            return;
+        }
+        if(node.LeftChild == null && node.RightChild != null)
+        {
+            node.data = node.RightChild.data;
+            node.RightChild = null;
+            node.Parent = null;
+            return;
+        }
+        if (node.RightChild == null && node.LeftChild != null)
+        {
+            node.data = node.LeftChild.data;
+            node.LeftChild = null;
+            node.Parent = null;
+            return;
+        }
+
+        BSNode temp = node.RightChild;
+        while (true)
+        {
+            if(temp.LeftChild != null)
+            {
+                temp = temp.LeftChild;
+            }
+            else
+            {
+                break;
+            }
+        }
+        node.data = temp.data;
+        Delete(temp);
+    }
 }
 
 public class BSNode
@@ -127,7 +199,7 @@ public class BSNode
     public BSNode LeftChild { get; set; }
     public BSNode RightChild { get; set; }
     public BSNode Parent { get; set; }
-    public int data { private set; get; } 
+    public int data { set; get; } 
 
     public BSNode(int item)
     {
