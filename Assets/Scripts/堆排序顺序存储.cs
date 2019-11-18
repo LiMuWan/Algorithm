@@ -24,7 +24,7 @@ public class 堆排序顺序存储 : MonoBehaviour
         for (int i = data.Length; i > 1; i--)
         {
             //把编号1和编号i位置进行交换
-            //1到(i-1)构造程大顶堆
+            //1到(i-1)构造成大顶堆
             int temp = data[0];
             data[0] = data[i - 1];
             data[i - 1] = temp;
@@ -55,7 +55,7 @@ public class 堆排序顺序存储 : MonoBehaviour
 
             if (maxNodeNumber != tempI)//发现了一个比i更大的子结点，交换i和maxnodenumber里面的数据
             {
-                int temp1 = data[tempI - 1];
+                int temp1 = data[tempI - 1];    
                 data[tempI - 1] = data[maxNodeNumber - 1];
                 data[maxNodeNumber - 1] = temp1;
                 tempI = maxNodeNumber;
